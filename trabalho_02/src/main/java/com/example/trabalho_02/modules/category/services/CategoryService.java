@@ -1,6 +1,7 @@
 package com.example.trabalho_02.modules.category.services;
 
 import java.util.UUID;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.example.trabalho_02.exceptions.CategoryNameAlreadyExist;
+import com.example.trabalho_02.modules.catalog.model.Catalog;
 import com.example.trabalho_02.modules.catalog.repository.CatalogRepository;
 import com.example.trabalho_02.modules.category.model.Category;
 import com.example.trabalho_02.modules.category.repository.CategoryRepository;
@@ -50,7 +52,11 @@ public class CategoryService {
     public void deleteCategoryByID(UUID id){
         Category category = categoryRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
-
+        List<Catalog> catalogs = this.catalogRepository.findAllByCategory(category);
+        for (Catalog catalog : catalogs) {
+            catalog.getCategory().remove(category);
+            this.catalogRepository.save(catalog); 
+        }
         categoryRepository.delete(category);
     }
 

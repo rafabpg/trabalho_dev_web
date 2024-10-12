@@ -8,6 +8,7 @@ import com.example.trabalho_02.modules.category.model.Category;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -43,11 +44,11 @@ public class Catalog {
     @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres.")
     private String description;
 
-    @NotNull(message = "A duração é obrigatória.")
-    @Min(value = 1, message = "A duração deve ser maior que 0.")
-    private Integer duration;
+    @ElementCollection
+    @NotEmpty(message = "A lista de personagens não pode ser vazia.")
+    private List<String> characters;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "catalog_category", 
         joinColumns = @JoinColumn(name = "catalog_id"), 

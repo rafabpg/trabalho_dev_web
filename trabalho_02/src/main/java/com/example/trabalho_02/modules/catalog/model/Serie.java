@@ -20,7 +20,4 @@ public class Serie extends Catalog {
     @Min(value = 1, message = "A série deve ter pelo menos 1 temporada.")
     private Integer seasons;
 
-    @ElementCollection
-    @NotEmpty(message = "A lista de personagens não pode ser vazia.")
-    private List<String> characters;
 }

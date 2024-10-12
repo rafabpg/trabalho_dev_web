@@ -5,7 +5,9 @@ import java.util.List;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 
@@ -15,7 +17,8 @@ import lombok.Data;
 @DiscriminatorValue("MOVIE")
 public class Movie  extends Catalog{
 
-    @ElementCollection
-    @NotEmpty(message = "A lista de personagens não pode ser vazia.")
-    private List<String> characters;
+    @NotNull(message = "A duração é obrigatória.")
+    @Min(value = 1, message = "A duração deve ser maior que 0.")
+    private Integer duration;
+
 }
