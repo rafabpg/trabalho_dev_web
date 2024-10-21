@@ -32,12 +32,10 @@
           </div>
         </div>
       </nav>
-    
-      <!-- Filtro de Gênero e Status -->
       <div class="container mt-4">
         <div class="row">
           <div class="col-md-12 d-flex justify-content-between">
-            <h2>Séries Disponíveis</h2>
+            <h2>Séries</h2>
             <div>
               <label for="statusFilter" class="me-2">Status:</label>
               <select id="statusFilter" class="form-select d-inline-block w-auto" aria-label="Filtrar por Status">
@@ -57,24 +55,20 @@
           </div>
         </div>
       </div>
-    
-      <!-- Grid de Séries -->
       <div class="container mt-4">
         <div class="row">
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Série Ação">
+              <img src="images/stranger-things.jpg" class="card-img-top" alt="Stranger Things placeholder">
               <div class="card-body">
-                <h5 class="card-title">Série Ação</h5>
-                <p class="card-text">Breve descrição da série de ação.</p>
-                <!-- Barra de Progresso (Popularidade ou Classificação) -->
+                <h5 class="card-title">Stranger Things</h5>
+                <p class="card-text">Uma série de ação e mistério onde um grupo de crianças enfrenta forças sobrenaturais e conspirações secretas na pequena cidade de Hawkins.</p>
                 <div class="mb-3">
                   <label for="popularity1" class="form-label">Popularidade</label>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                    <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
                   </div>
                 </div>
-                <!-- Accordion para mais detalhes -->
                 <div class="accordion" id="accordion1">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="heading1">
@@ -84,26 +78,25 @@
                     </h2>
                     <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordion1">
                       <div class="accordion-body">
-                        Informações detalhadas sobre a série, elenco, diretor, temporadas e episódios.
+                        Informações detalhadas sobre "Stranger Things", incluindo elenco com Millie Bobby Brown, direção dos Irmãos Duffer, e número de temporadas. A série explora temas como amizade, coragem, e a luta contra o desconhecido.
                       </div>
                     </div>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
-    
-          <!-- Outros cards de séries -->
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Série Comédia">
+              <img src="images/brooklyn-nine-nine.jpg" class="card-img-top" alt="Brooklyn Nine-Nine  placeholder">
               <div class="card-body">
-                <h5 class="card-title">Série Comédia</h5>
-                <p class="card-text">Breve descrição da série de comédia.</p>
+                <h5 class="card-title">Brooklyn Nine-Nine</h5>
+                <p class="card-text">Uma série de comédia que segue as hilárias aventuras de uma equipe de detetives da 99ª delegacia de polícia de Nova York.</p>
                 <div class="mb-3">
                   <label for="popularity2" class="form-label">Popularidade</label>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                    <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
                   </div>
                 </div>
                 <div class="accordion" id="accordion2">
@@ -115,7 +108,7 @@
                     </h2>
                     <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion2">
                       <div class="accordion-body">
-                        Informações detalhadas sobre a série de comédia, elenco, diretor, temporadas e episódios.
+                        Informações detalhadas sobre "Brooklyn Nine-Nine", elenco com Andy Samberg, Terry Crews, e outros. Dirigida por Michael Schur e Dan Goor, a série é conhecida por seu humor rápido e personagens cativantes.
                       </div>
                     </div>
                   </div>
@@ -126,37 +119,37 @@
     
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Série Drama">
+              <img src="images/breaking-bad.jpg" class="card-img-top" alt="Breaking Bad Placeholder">
               <div class="card-body">
-                <h5 class="card-title">Série Drama</h5>
-                <p class="card-text">Breve descrição da série de drama.</p>
-                <div class="mb-3">
-                  <label for="popularity3" class="form-label">Popularidade</label>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                <h5 class="card-title">Breaking Bad</h5>
+                  <p class="card-text">A emocionante jornada de um professor de química que se transforma em um poderoso traficante de drogas após ser diagnosticado com câncer.</p>
+                  <div class="mb-3">
+                    <label for="popularity3" class="form-label">Popularidade</label>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
+                    </div>
                   </div>
-                </div>
-                <div class="accordion" id="accordion3">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading3">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                        Mais detalhes
-                      </button>
-                    </h2>
-                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion3">
-                      <div class="accordion-body">
-                        Informações detalhadas sobre a série de drama, elenco, diretor, temporadas e episódios.
+                  <div class="accordion" id="accordion3">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                          Mais detalhes
+                        </button>
+                      </h2>
+                      <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion3">
+                        <div class="accordion-body">
+                          Detalhes sobre "Breaking Bad", estrelada por Bryan Cranston e Aaron Paul, dirigida por Vince Gilligan. Uma das séries mais aclamadas da TV, explora as complexas decisões morais do protagonista.
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
     
-      <!-- Paginação -->
       <nav aria-label="Navegação de página" class="d-flex justify-content-center mt-4">
         <ul class="pagination">
           <li class="page-item">
