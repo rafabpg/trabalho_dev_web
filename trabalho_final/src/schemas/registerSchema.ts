@@ -17,13 +17,13 @@ export const cadastroSchema = z.object({
     .min(1, { message: "Campo obrigatório" })
     .regex(new RegExp(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), {
       message: "CPF inválido",
-    }),
+    }).transform((val) => val.replace(/[^\d]/g, "")),
 
   telefone: z
     .string()
     .min(1, { message: "Campo obrigatório" })
     .regex(phoneRegex, { message: "Telefone inválido" })
-    .transform((value) => value.replace(/\(|\)/g, "")),
+    .transform((val) => val.replace(/[^\d]/g, "")),
 
   senha_hash: z
     .string()

@@ -1,29 +1,26 @@
-import React from 'react'
-import { useMutation } from 'react-query'
-import { HttpClient } from '../services/axiosAdapter'
+import { useMutation } from "@tanstack/react-query"
+import { HttpClient } from "../services/axiosAdapter";
 
 type PostDataProps<T = unknown> = {
-    httpClient: HttpClient,
-    data: T,
-    url: string
-}
+  httpClient: HttpClient;
+  data: T;
+  url: string;
+};
 const usePostData = () => {
-  
-    const mutation = useMutation(
-        async ({httpClient, data, url}:PostDataProps) => {
-            await httpClient.request({
-                url: url,
-                method: 'post',
-                body: data
-            })
-        }
-    )
+  const mutation = useMutation({
+    mutationFn: async ({ httpClient, data, url }: PostDataProps) => {
+      const response =  await httpClient.request({
+        url: url,
+        method: "post",
+        body: data,
+      });
+      return { data: response.body, status: response.statusCode };
+    },
+  });
 
-    return {
-        ...mutation,
-    }
-
-
-}
+  return {
+    ...mutation,
+  };
+};
 
 export default usePostData;

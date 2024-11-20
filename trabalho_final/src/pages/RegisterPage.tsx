@@ -1,18 +1,19 @@
 import React from "react";
 import FormField from "../components/Atoms/FormField";
 import { cadastroSchema } from "../schemas/registerSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const RegisterPage = () => {
-  const { handleSubmit, register, errors, handleSubmitForm } =
-    useForm(cadastroSchema);
-  
+  const { handleSubmit, register, errors } = useForm(cadastroSchema);
+  const { handleRegister } = useAuthContext();
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow">
       <h1 className="text-2xl font-bold text-center mb-6">Cadastro</h1>
-      <form onSubmit={handleSubmit(handleSubmitForm)}>
+      <form onSubmit={handleSubmit((data) => handleRegister(data, navigate))}>
         <FormField
           label="Nome"
           type="text"

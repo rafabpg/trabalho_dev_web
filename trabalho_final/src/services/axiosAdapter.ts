@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { axiosClient } from "./axiosClient";
 
 
@@ -15,9 +15,9 @@ export interface HttpClient<R = any> {
 
 export class AxiosHttpClientAdapter implements HttpClient {
     async  request(data:HttRequest){
-        let axiosResponse:AxiosResponse;
+        let axiosResponse:any;
         try {
-            axiosResponse = await axiosClient.request({
+           axiosResponse = await axiosClient.request({
                 url: data.url,
                 method: data.method,
                 data: data.body,
@@ -26,9 +26,10 @@ export class AxiosHttpClientAdapter implements HttpClient {
             const _error = error as AxiosError<{message:string}>
             throw new Error(_error.response?.data.message)
         }
+        const responseBody = axiosResponse.data === '' ? null : axiosResponse?.data;
         return {
             statusCode:axiosResponse.status,
-            body: axiosResponse?.data
+            body: responseBody
         }
     }
 }

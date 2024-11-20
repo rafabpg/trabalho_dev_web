@@ -10,6 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableMethodSecurity
@@ -24,13 +27,24 @@ public class SecurityConfig {
             auth -> {
                 auth
                 .requestMatchers("/auth/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                .requestMatchers("/user").permitAll()
                 .requestMatchers( "/catalog/movie").permitAll()
-                .requestMatchers( "/catalogseries").permitAll();
+                .requestMatchers( "/catalog/series").permitAll();
                 auth.anyRequest().authenticated();
             }
         ).addFilterBefore(securityFilter,BasicAuthenticationFilter.class);
         return  http.build();
+    }
+    @Bean
+    CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("*"); 
+        config.addAllowedMethod("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedHeader("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
 

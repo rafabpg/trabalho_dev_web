@@ -3,7 +3,7 @@ import { LoginSchemaType } from "../schemas/loginSchema";
 import { NavigateFunction } from "react-router-dom";
 import { CadastroSchemaType } from "../schemas/registerSchema";
 import { UserProps } from "../shared/UserInterface";
-import { userAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 interface AuthContextData {
     user: UserProps
@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       isAuthenticated,
       isLoading,
       handleLogout,
-    } = userAuthContext()
+    } = useAuthContext()
   
     return (
       <AuthContext.Provider

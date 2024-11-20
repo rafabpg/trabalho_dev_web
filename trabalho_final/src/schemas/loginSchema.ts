@@ -6,9 +6,9 @@ export const loginSchema = z.object({
     .min(1, { message: "Campo obrigatório" })
     .regex(new RegExp(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), {
       message: "CPF inválido",
-    }),
+    }).transform((val) => val.replace(/[^\d]/g, "")),
 
-  senha_hash: z.string().min(1, { message: "Campo obrigatório" }),
+  password: z.string().min(1, { message: "Campo obrigatório" }),
 });
 
 export type LoginSchemaType = z.infer<typeof loginSchema>;
