@@ -40,7 +40,6 @@ public class CatalogDTO {
     private Integer year;
 
     @NotBlank(message = "A URL da imagem não pode ser vazia.")
-    @Size(max = 255, message = "A URL da imagem deve ter no máximo 255 caracteres.")
     private String imageUrl;
 
     @NotNull(message = "A disponibilidade é obrigatória.")

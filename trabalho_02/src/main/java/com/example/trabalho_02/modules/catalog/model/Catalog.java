@@ -61,8 +61,7 @@ public class Catalog {
     @Min(value = 1888, message = "O ano deve ser posterior a 1888.")
     private Integer year;
 
-    @NotBlank(message = "A URL da imagem não pode ser vazia.")
-    @Size(max = 255, message = "A URL da imagem deve ter no máximo 255 caracteres.")
+    @NotBlank(message = "A URL da imagem não pode ser vazia.")  
     private String imageUrl;
 
     @NotNull(message = "A disponibilidade é obrigatória.")

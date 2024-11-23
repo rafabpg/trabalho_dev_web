@@ -7,12 +7,12 @@ export const MediaSchema = z.object({
   description: z.string().min(1, "A descrição é obrigatória."),
   year: z.number().min(1900, "Ano inválido."),
   imageUrl: z.string().url("URL inválida."),
-  isAvailable: z.boolean(),
+  isAvailable: z.literal(true),
   mediaType: mediaTypeEnum,
   categoryIds: z.array(z.string()).min(1, "Selecione ao menos uma categoria."),
   characters: z.array(z.string()).min(1, "Insira pelo menos um personagem."),
   duration: z.number().optional(), 
-  seasons: z.number().optional(),  m 
+  seasons: z.number().optional(),
 });
 
 export type MediaSchemaType = z.infer<typeof MediaSchema>;

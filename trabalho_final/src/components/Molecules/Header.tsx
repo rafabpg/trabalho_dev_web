@@ -19,7 +19,7 @@ const Header = () => {
           <NavLinkItem link="/" children="Home" />
           <NavLinkItem link="/filmes" children="Lista de Filmes" />
           <NavLinkItem link="/series" children="Lista de Séries" />
-          <NavLinkItem link="/criar-midia" children="Adicionar uma Mídia" />
+          <NavLinkItem link="/criar-media" children="Adicionar uma Mídia" />
         </nav>
 
         <div className="flex space-x-4 items-center">
