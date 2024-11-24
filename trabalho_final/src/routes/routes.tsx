@@ -6,16 +6,17 @@ import RegisterPage from "../pages/RegisterPage";
 import { useAuthContext } from "../hooks/useAuthContext";
 import NotFoundPage from "../pages/NotFoundPage";
 import CreateMedia from "../pages/CreateMedia";
+import FilmList from "../pages/FilmList";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LayoutTemplate />}>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cadastro" element={<RegisterPage />} />
           <Route path="/criar-media" element={<CreateMedia />} />
+          <Route path="/" element={<FilmList />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

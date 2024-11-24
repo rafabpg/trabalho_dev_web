@@ -16,8 +16,7 @@ const Header = () => {
         </Link>
 
         <nav className="flex space-x-6">
-          <NavLinkItem link="/" children="Home" />
-          <NavLinkItem link="/filmes" children="Lista de Filmes" />
+          <NavLinkItem link="/" children="Lista de Filmes" />
           <NavLinkItem link="/series" children="Lista de Séries" />
           <NavLinkItem link="/criar-media" children="Adicionar uma Mídia" />
         </nav>
