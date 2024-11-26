@@ -7,6 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import NotFoundPage from "../pages/NotFoundPage";
 import CreateMedia from "../pages/CreateMedia";
 import FilmList from "../pages/FilmList";
+import SeriesList from "../pages/SeriesList";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
           <Route path="/cadastro" element={<RegisterPage />} />
           <Route path="/criar-media" element={<CreateMedia />} />
           <Route path="/" element={<FilmList />} />
+          <Route path="/series" element={<SeriesList />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
