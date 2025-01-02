@@ -6,6 +6,7 @@ interface Media {
   categoryIds: string[];
   year: number;
   imageUrl: string;
+  price: number;
   isAvailable: boolean;
   mediaType: "MOVIE" | "SERIES";
 }

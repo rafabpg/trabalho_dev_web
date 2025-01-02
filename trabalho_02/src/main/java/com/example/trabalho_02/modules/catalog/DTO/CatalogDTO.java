@@ -35,6 +35,8 @@ public class CatalogDTO {
     @NotEmpty(message = "O catálogo deve ter pelo menos uma categoria.")
     private List<UUID> categoryIds; 
 
+    private Float price;
+
     @NotNull(message = "O ano é obrigatório.")
     @Min(value = 1888, message = "O ano deve ser posterior a 1888.")
     private Integer year;

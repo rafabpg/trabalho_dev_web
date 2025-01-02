@@ -7,13 +7,14 @@ import Chip from "../components/Atoms/CategoryChip";
 import useGetData from "../hooks/useGetData";
 import { AxiosHttpClientAdapter } from "../services/axiosAdapter";
 import usePostData from "../hooks/usePostData";
-import { toast } from "react-toastify";
+
 import { CategoryInterface } from "../shared/CategoryInterface";
+import { useNotification } from "../hooks/useNotification";
 
 const CreateMedia = () => {
   const [characters, setCharacters] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-
+  const { showSuccess, showError } = useNotification();
   const {
     register,
     handleSubmit,
@@ -69,7 +70,7 @@ const CreateMedia = () => {
     setValue("categoryIds", updatedCategories);
   };
 
-  const removeUnnecessaryFields = (data:any) => {
+  const removeUnnecessaryFields = (data: any) => {
     if (data.mediaType === "MOVIE") {
       delete data.seasons;
     } else if (data.mediaType === "SERIES") {
@@ -88,12 +89,12 @@ const CreateMedia = () => {
         data,
         url: urlString,
       });
-      toast.success("Adicionada com sucesso!");
+      showSuccess("Mídia adicionada com sucesso.");
       reset();
       setCharacters([]);
       setCategories([]);
     } catch (error) {
-      toast.error("Erro ao adicionar mídia.");
+      showError("Erro ao adicionar mídia.");
     }
   };
 
@@ -135,6 +136,14 @@ const CreateMedia = () => {
         placeholder="Digite o ano"
         register={register("year", { valueAsNumber: true })}
         error={errors.year?.message}
+      />
+      <FormField
+        label="Preço"
+        type="string"
+        id="price"
+        placeholder="Digite o preço"
+        register={register("price", { valueAsNumber: true })}
+        error={errors.price?.message}
       />
       <FormField
         label="URL da Imagem"

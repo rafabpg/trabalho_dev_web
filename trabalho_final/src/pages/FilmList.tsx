@@ -1,20 +1,30 @@
-import React, { useState } from "react";
-import useGetData from "../hooks/useGetData";
-import { AxiosHttpClientAdapter } from "../services/axiosAdapter";
-import Card from "../components/Atoms/Card";
+import React, { useEffect } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
+import Card from "../components/Atoms/Card";
 import { Movie } from "../shared/CatalogInterface";
 
 const FilmList = () => {
-  const [page, setPage] = useState(0);
-  const { data, isLoading } = useGetData({
-    httpClient: new AxiosHttpClientAdapter(),
-    url: "/catalog/movie",
-    page,
-    size: 2,
-  });
+  const fetchFilms = async ({ pageParam = 0 }) => {
+    const response = await fetch(`http://localhost:8080/catalog/movie?page=${pageParam}&size=2`);
+    const data = await response.json();
+    console.log(data)
+    return {
+      data: data.content,
+      nextPage: data.pageable.pageNumber + 1,
+      totalPages: data.totalPages,
+    };
+  };
 
-  const totalPages = data ? data.data.totalPages : 1;
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useInfiniteQuery(['infiniteGetData'], fetchFilms, {
+    getNextPageParam: (lastPage) => (lastPage.nextPage < lastPage.totalPages ? lastPage.nextPage : false),
+  });
 
   return (
     <>
@@ -28,30 +38,20 @@ const FilmList = () => {
       ) : (
         <>
           <div className="flex flex-wrap justify-center">
-            {data!.data.content.map((film: Movie) => (
-              <Card key={film.id} {...film} />
-            ))}
+            {data?.pages.map((page) =>
+              page.data.map((film: Movie) => <Card key={film.id} {...film} />)
+            )}
           </div>
-          <div className="flex justify-center items-center p-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-              onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
-              disabled={page === 0}
-            >
-              Anterior
-            </button>
-            <span className="text-gray-700 mx-2">
-              Página {page + 1} de {totalPages}
-            </span>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-              onClick={() =>
-                setPage((prev) => Math.min(prev + 1, totalPages - 1))
-              }
-              disabled={page === totalPages - 1}
-            >
-              Próxima
-            </button>
+          <div className="flex justify-center my-4">
+            {hasNextPage && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
+              >
+                {isFetchingNextPage ? "Carregando..." : "Carregar Mais"}
+              </button>
+            )}
           </div>
         </>
       )}

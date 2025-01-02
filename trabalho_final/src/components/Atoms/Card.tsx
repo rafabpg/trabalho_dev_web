@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Movie, Series } from "../../shared/CatalogInterface";
+import { useNavigate } from "react-router-dom";
 
 const Card = (media: Movie | Series) => {
-  const [showDetails, setShowDetails] = useState(false);
 
-  const handleToggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate(`/media/${media.id}`)
+  }
 
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
@@ -15,6 +17,7 @@ const Card = (media: Movie | Series) => {
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{media.title}</div>
           <p className="text-gray-700 text-base">{media.description}</p>
+          <span className="text-gray-700 text-base">R$ {(media.price).toFixed(2)}</span>
         </div>
         <div className="px-6 pt-4 pb-2">
           <button
@@ -25,29 +28,10 @@ const Card = (media: Movie | Series) => {
           </button>
           <button
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-            onClick={handleToggleDetails}
+            onClick={handleNavigate}
           >
-            {showDetails ? "Ocultar Detalhes" : "Mostrar Mais Detalhes"}
+            Mostrar Mais Detalhes
           </button>
-          {showDetails && (
-            <div className="mt-4 text-gray-700">
-              <p>
-                <strong>Ano:</strong> {media.year}
-              </p>
-              {media.mediaType === "SERIES" ? (
-                <p>
-                  <strong>Temporadas:</strong> {media.seasons}
-                </p>
-              ) : (
-                <p>
-                  <strong>Duração:</strong> {media.duration} minutos
-                </p>
-              )}
-              <p>
-                <strong>Personagens:</strong> {media.characters.join(", ")}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>

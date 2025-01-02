@@ -9,6 +9,7 @@ export const MediaSchema = z.object({
   imageUrl: z.string().url("URL inválida."),
   isAvailable: z.literal(true),
   mediaType: mediaTypeEnum,
+  price:z.number(),
   categoryIds: z.array(z.string()).min(1, "Selecione ao menos uma categoria."),
   characters: z.array(z.string()).min(1, "Insira pelo menos um personagem."),
   duration: z.number().optional(), 

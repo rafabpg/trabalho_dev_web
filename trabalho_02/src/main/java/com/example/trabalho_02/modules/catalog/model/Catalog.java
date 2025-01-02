@@ -61,6 +61,9 @@ public class Catalog {
     @Min(value = 1888, message = "O ano deve ser posterior a 1888.")
     private Integer year;
 
+    @NotNull(message = "O preço é obrigatório.")
+    private Float price;
+
     @NotBlank(message = "A URL da imagem não pode ser vazia.")  
     private String imageUrl;
 

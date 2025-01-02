@@ -3,6 +3,7 @@ import AppRoutes from "./routes/routes";
 import { queryClient } from "./services/queryCliente";
 import {  AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function App() {
   return (

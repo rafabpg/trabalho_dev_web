@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
 import LayoutTemplate from "../layout/LayoutTemplate";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -8,6 +7,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import CreateMedia from "../pages/CreateMedia";
 import FilmList from "../pages/FilmList";
 import SeriesList from "../pages/SeriesList";
+import MediaDetails from "../pages/MediaDetails";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +19,7 @@ const AppRoutes = () => {
           <Route path="/criar-media" element={<CreateMedia />} />
           <Route path="/" element={<FilmList />} />
           <Route path="/series" element={<SeriesList />} />
+          <Route path="/media/:id" element={<MediaDetails />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
