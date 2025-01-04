@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
 import Card from "../components/Atoms/Card";
 import { Movie } from "../shared/CatalogInterface";
+import { useCartContext } from "../context/CartContext";
 
 const FilmList = () => {
   const fetchFilms = async ({ pageParam = 0 }) => {
@@ -15,7 +16,7 @@ const FilmList = () => {
       totalPages: data.totalPages,
     };
   };
-
+  
   const {
     data,
     fetchNextPage,
