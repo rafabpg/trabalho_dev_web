@@ -8,6 +8,8 @@ import CreateMedia from "../pages/CreateMedia";
 import FilmList from "../pages/FilmList";
 import SeriesList from "../pages/SeriesList";
 import MediaDetails from "../pages/MediaDetails";
+import PrivateRoute from "./PrivateRoutes";
+import CartPage from "../pages/CartPage";
 
 const AppRoutes = () => {
   return (
@@ -16,10 +18,13 @@ const AppRoutes = () => {
         <Route path="/" element={<LayoutTemplate />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cadastro" element={<RegisterPage />} />
-          <Route path="/criar-media" element={<CreateMedia />} />
           <Route path="/" element={<FilmList />} />
           <Route path="/series" element={<SeriesList />} />
           <Route path="/media/:id" element={<MediaDetails />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/criar-media" element={<CreateMedia />} />
+            <Route path="/carrinho" element={<CartPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

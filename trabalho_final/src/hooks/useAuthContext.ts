@@ -39,15 +39,18 @@ export function useAuthContext() {
       url: "/auth/login",
     });
     if (response.status === 200) {
-      localStorage.setItem("token", response.data.token);
       setIsAuthenticated(true);
+
+      localStorage.setItem("token", response.data.token);
       navigate("/");
+      window.location.reload();
     }
   };
 
   const handleLogout =  () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
+    window.location.reload();
     setUser({} as UserProps);
   };
 

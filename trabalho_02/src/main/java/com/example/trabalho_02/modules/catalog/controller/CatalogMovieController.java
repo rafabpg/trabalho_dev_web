@@ -51,6 +51,16 @@ public class CatalogMovieController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable UUID id) {
+        try {
+            var result = this.catalogMovieService.getById(id);
+            return ResponseEntity.status(200).body(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteMovie(@PathVariable UUID id) {
         try {

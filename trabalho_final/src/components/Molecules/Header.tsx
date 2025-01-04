@@ -6,7 +6,7 @@ import NavLinkItem from "../Atoms/NavLinkItem";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Header = () => {
-  const { isAuthenticated,handleLogout } = useAuthContext();
+  const { isAuthenticated, handleLogout } = useAuthContext();
 
   return (
     <header className="bg-gray-900 text-white">
@@ -22,9 +22,12 @@ const Header = () => {
         </nav>
 
         <div className="flex space-x-4 items-center">
-          {isAuthenticated ? (
+          {localStorage.getItem('token') ? (
             <>
-              <button className="flex items-center hover:text-gray-300" onClick={handleLogout}>
+              <button
+                className="flex items-center hover:text-gray-300"
+                onClick={handleLogout}
+              >
                 <CiLogout size={20} className="mr-1" />
                 Logout
               </button>

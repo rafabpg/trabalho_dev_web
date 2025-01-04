@@ -47,6 +47,16 @@ public class CatalogSeriesController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable UUID id) {
+        try {
+            var result = this.catalogSerieService.getById(id);
+            return ResponseEntity.status(200).body(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSerie(@PathVariable UUID id) {
         try {

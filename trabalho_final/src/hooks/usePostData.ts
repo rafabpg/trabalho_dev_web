@@ -19,6 +19,7 @@ const usePostData = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['getData']);
+      queryClient.invalidateQueries(['infiniteGetData']);
     },
   });
 

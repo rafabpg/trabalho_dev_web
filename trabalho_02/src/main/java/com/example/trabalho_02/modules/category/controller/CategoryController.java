@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.trabalho_02.modules.catalog.services.CatalogMovieService;
 import com.example.trabalho_02.modules.category.model.Category;
 import com.example.trabalho_02.modules.category.services.CategoryService;
 
@@ -49,6 +50,17 @@ public class CategoryController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getMovieByCategories(@PathVariable UUID id) {
+        try {
+            var result = categoryService.getMoviesByCategorieId(id);
+            return ResponseEntity.status(200).body(result);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCategoryByID(@PathVariable UUID id, @Valid @RequestBody Category entity) {

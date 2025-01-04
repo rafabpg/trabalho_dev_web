@@ -21,20 +21,23 @@ public class SecurityConfig {
     private SecurityFilter securityFilter;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf(csrf ->csrf.disable()).authorizeHttpRequests(
-            auth -> {
-                auth
-                .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/user").permitAll()
-                .requestMatchers("/category").permitAll()
-                .requestMatchers( "/catalog/movie").permitAll()
-                .requestMatchers( "/catalog/series").permitAll();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers("/auth/login").permitAll();
+                auth.requestMatchers("/user").permitAll();
+                auth.requestMatchers("/category").permitAll();
+                auth.requestMatchers("/category/{id}").permitAll();
+                auth.requestMatchers("/catalog/movie").permitAll();
+                auth.requestMatchers("/catalog/movie/{id}").permitAll();
+                auth.requestMatchers("/catalog/series/{id}").permitAll();
+                auth.requestMatchers("/catalog/series").permitAll();
                 auth.anyRequest().authenticated();
-            }
-        ).addFilterBefore(securityFilter,BasicAuthenticationFilter.class);
-        return  http.build();
+            })
+            .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
+        return http.build();
     }
+    
     @Bean
     CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

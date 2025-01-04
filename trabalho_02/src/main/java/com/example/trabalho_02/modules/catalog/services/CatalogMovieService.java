@@ -49,6 +49,13 @@ public class CatalogMovieService {
         return moviePage.map(movie -> movieMapper.toDto(movie));
     }
 
+
+    public MovieDTO getById(UUID id){
+        var result = this.catalogRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Filme não encontrado"));
+        return result instanceof Movie ? movieMapper.toDto((Movie) result) : null;
+    }
+
     public void deleteMovie(UUID id) {
         var result = this.catalogRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Filme não encontrado"));

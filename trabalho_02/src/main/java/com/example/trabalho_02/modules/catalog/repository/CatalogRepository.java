@@ -21,4 +21,7 @@ public interface CatalogRepository extends JpaRepository<Catalog, UUID>{
     Page<Serie> findAllSeries(Pageable pageable);
 
     List<Catalog> findAllByCategory(Category category);
+    
+    Page<Movie> findAllMoviesByCategory(Category category,Pageable pageable);
+
 }

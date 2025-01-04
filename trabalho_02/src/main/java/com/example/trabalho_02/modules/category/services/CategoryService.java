@@ -11,7 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.example.trabalho_02.exceptions.CategoryNameAlreadyExist;
+import com.example.trabalho_02.modules.catalog.DTO.MovieDTO;
+import com.example.trabalho_02.modules.catalog.mapper.MovieMapper;
 import com.example.trabalho_02.modules.catalog.model.Catalog;
+import com.example.trabalho_02.modules.catalog.model.Movie;
 import com.example.trabalho_02.modules.catalog.repository.CatalogRepository;
 import com.example.trabalho_02.modules.category.model.Category;
 import com.example.trabalho_02.modules.category.repository.CategoryRepository;
@@ -24,6 +27,9 @@ public class CategoryService {
 
     @Autowired
     private CatalogRepository catalogRepository;
+
+    @Autowired
+    private MovieMapper movieMapper;
 
     public Category createCategory(Category category){
         this.categoryRepository.findByNome(category.getNome()).ifPresent((course)->{
@@ -42,6 +48,15 @@ public class CategoryService {
         }
         existingCategory.setNome(updatedCategory.getNome());
         return categoryRepository.save(existingCategory);
+    }
+
+
+    public Page<MovieDTO> getMoviesByCategorieId(UUID id){
+        Category category = categoryRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Movie> moviesPage = catalogRepository.findAllMoviesByCategory(category, pageable);
+        return moviesPage.map(movieMapper::toDto);
     }
 
     public Page<Category> getCategoriesWithPagination(int page, int size) {

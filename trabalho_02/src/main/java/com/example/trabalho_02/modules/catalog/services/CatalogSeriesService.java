@@ -9,8 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
 import java.util.List;
+
+import com.example.trabalho_02.modules.catalog.DTO.MovieDTO;
 import com.example.trabalho_02.modules.catalog.DTO.SeriesDTO;
 import com.example.trabalho_02.modules.catalog.mapper.SerieMapper;
+import com.example.trabalho_02.modules.catalog.model.Movie;
 import com.example.trabalho_02.modules.catalog.model.Serie;
 import com.example.trabalho_02.modules.catalog.repository.CatalogRepository;
 import com.example.trabalho_02.modules.category.model.Category;
@@ -39,6 +42,12 @@ public class CatalogSeriesService {
         serie.setCategory(categories);  
         Serie savedSerie = this.catalogRepository.save(serie);
         return seriesMapper.toDto(savedSerie);
+    }
+
+      public SeriesDTO getById(UUID id){
+        var result = this.catalogRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Serie não encontrada"));
+        return result instanceof Serie ? seriesMapper.toDto((Serie) result) : null;
     }
 
     public Page<SeriesDTO> getSeriesWithPagination(int page, int size) {
