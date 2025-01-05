@@ -12,6 +12,8 @@ import FormField from "../components/Atoms/FormField";
 import { MovieSchema, MovieSchemaType } from "../schemas/movieSchema";
 import Chip from "../components/Atoms/CategoryChip";
 import { CategoryInterface } from "../shared/CategoryInterface";
+import { useCartContext } from "../context/CartContext";
+import { useNotification } from "../hooks/useNotification";
 
 const MediaDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -57,8 +59,6 @@ const MediaDetails = () => {
     });
     navigate("/");
   };
-
-  const handleAddCart = async () => {};
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -108,7 +108,8 @@ const MediaDetails = () => {
     setIsEditing(false);
     navigate(`/media/${id}`);
   };
-
+  const { showSuccess, showError } = useNotification();
+  const { addToCart } = useCartContext();
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -288,7 +289,22 @@ const MediaDetails = () => {
           <div className="p-6 border-t flex justify-between space-x-4">
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleAddCart}
+              onClick={() => {
+                showSuccess("Produto adicionado ao carrinho com sucesso");
+                addToCart({
+                  id: movie.id,
+                  title: movie.title,
+                  description: movie.description,
+                  imageUrl: movie.imageUrl,
+                  price: movie.price,
+                  mediaType: "MOVIE",
+                  duration: movie.duration,
+                  characters: movie.characters,
+                  categoryIds: movie.categoryIds,
+                  year: movie.year,
+                  isAvailable: true
+                });
+              }}
             >
               Adicionar ao Carrinho
             </button>
